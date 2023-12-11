@@ -516,10 +516,10 @@ static const yytype_uint8 yyrline[] =
 {
        0,    65,    65,    66,    67,    68,    69,    70,    71,    73,
       74,    76,    77,    79,    80,    81,    82,    83,    84,    86,
-      87,    89,   103,    89,   124,   133,   143,   151,   160,   168,
-     176,   184,   160,   200,   201,   202,   203,   204,   205,   207,
-     216,   219,   220,   221,   223,   224,   225,   226,   228,   236,
-     238
+      87,    89,   103,    89,   124,   137,   151,   159,   168,   176,
+     184,   192,   168,   208,   209,   210,   211,   212,   213,   215,
+     224,   227,   228,   229,   231,   232,   233,   234,   236,   244,
+     246
 };
 #endif
 
@@ -1559,29 +1559,37 @@ yyreduce:
                                                 tabsymb[_nsymbs].id = (yyvsp[(2) - (4)].str_val);
                                                 tabsymb[_nsymbs].address = _nsymbs;
                                                 _nsymbs++;
+                                                fprintf(yyout, "LEIA\nATR %%%d\n", getAddress((yyvsp[(2) - (4)].str_val)));
                                             }
-                                            fprintf(yyout, "ATR %%%d\n", getAddress((yyvsp[(2) - (4)].str_val)));
+                                            else {
+                                                printf("ERRO: semantic error");
+                                                exit(1);
+                                            }
                                             ;}
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 134 "syntax-parser.y"
+#line 138 "syntax-parser.y"
     {
                                             if(getAddress((yyvsp[(3) - (6)].str_val))==-1) {
                                                 tabsymb[_nsymbs].id = (yyvsp[(2) - (6)].str_val);
                                                 tabsymb[_nsymbs].address = _nsymbs;
                                                 _nsymbs++;
+                                                fprintf(yyout, "LEIA\nATR %%%d\n", getAddress((yyvsp[(2) - (6)].str_val)));
                                             }
-                                            fprintf(yyout, "LEIA\nATR %%%d\n", getAddress((yyvsp[(3) - (6)].str_val)));
+                                            else {
+                                                printf("ERRO: semantic error");
+                                                exit(1);
+                                            }
                                             ;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 143 "syntax-parser.y"
+#line 151 "syntax-parser.y"
     {
                                             if(getAddress((yyvsp[(1) - (3)].str_val))==-1) {
                                                 printf("ERRO: semantic error");
@@ -1594,7 +1602,7 @@ yyreduce:
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 152 "syntax-parser.y"
+#line 160 "syntax-parser.y"
     {
                                             if(getAddress((yyvsp[(3) - (5)].str_val))==-1) {
                                                 fprintf(yyout, "ERRO: semantic error");
@@ -1607,7 +1615,7 @@ yyreduce:
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 160 "syntax-parser.y"
+#line 168 "syntax-parser.y"
     {
                                             tabaction[_naction].id = _naction;
                                             tabaction[_naction].start = (_naction*2);
@@ -1618,7 +1626,7 @@ yyreduce:
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 168 "syntax-parser.y"
+#line 176 "syntax-parser.y"
     {
                                             if(getActionStart(_naction) < 10)
                                                 fprintf(yyout, "GFALSE R0%d\n", getActionStart(_naction)); 
@@ -1631,7 +1639,7 @@ yyreduce:
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 176 "syntax-parser.y"
+#line 184 "syntax-parser.y"
     {
                                             _naction--;
                                             if(getActionEnding(_naction) < 10)
@@ -1644,7 +1652,7 @@ yyreduce:
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 184 "syntax-parser.y"
+#line 192 "syntax-parser.y"
     {
                                             if(getActionStart(_naction) < 10)
                                                 fprintf(yyout, "R0%d: NADA\n", getActionStart(_naction)  ); 
@@ -1657,7 +1665,7 @@ yyreduce:
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 192 "syntax-parser.y"
+#line 200 "syntax-parser.y"
     {
                                             _naction--;
                                             if(getActionEnding(_naction) < 10)
@@ -1670,49 +1678,49 @@ yyreduce:
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 200 "syntax-parser.y"
+#line 208 "syntax-parser.y"
     {fprintf(yyout, "IGUAL\n");;}
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 201 "syntax-parser.y"
+#line 209 "syntax-parser.y"
     {fprintf(yyout, "DIFER\n");;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 202 "syntax-parser.y"
+#line 210 "syntax-parser.y"
     {fprintf(yyout, "MAIOR\n");;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 203 "syntax-parser.y"
+#line 211 "syntax-parser.y"
     {fprintf(yyout, "MENOR\n");;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 204 "syntax-parser.y"
+#line 212 "syntax-parser.y"
     {fprintf(yyout, "MAIOREQ\n");;}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 205 "syntax-parser.y"
+#line 213 "syntax-parser.y"
     {fprintf(yyout, "MENOREQ\n");;}
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 208 "syntax-parser.y"
+#line 216 "syntax-parser.y"
     {
                                             if(getAddress((yyvsp[(3) - (4)].str_val))==-1) {
                                                 printf("ERRO: semantic error");
@@ -1725,49 +1733,49 @@ yyreduce:
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 217 "syntax-parser.y"
+#line 225 "syntax-parser.y"
     {fprintf(yyout, "IMPR\n"); ;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 219 "syntax-parser.y"
+#line 227 "syntax-parser.y"
     {fprintf(yyout, "SOMA\n");;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 220 "syntax-parser.y"
+#line 228 "syntax-parser.y"
     {fprintf(yyout, "SUB\n");;}
     break;
 
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 223 "syntax-parser.y"
+#line 231 "syntax-parser.y"
     {fprintf(yyout, "MULT\n");;}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 224 "syntax-parser.y"
+#line 232 "syntax-parser.y"
     {fprintf(yyout, "DIV\n");;}
     break;
 
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 225 "syntax-parser.y"
+#line 233 "syntax-parser.y"
     {fprintf(yyout, "MOD\n");;}
     break;
 
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 228 "syntax-parser.y"
+#line 236 "syntax-parser.y"
     {
                                             if(getAddress((yyvsp[(1) - (1)].str_val))==-1) {
                                                 printf("ERRO: semantic error");
@@ -1780,14 +1788,14 @@ yyreduce:
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 236 "syntax-parser.y"
+#line 244 "syntax-parser.y"
     {fprintf(yyout, "PUSH %d\n", (yyvsp[(1) - (1)].int_val)); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1791 "syntax-parser.tab.c"
+#line 1799 "syntax-parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1999,7 +2007,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 240 "syntax-parser.y"
+#line 248 "syntax-parser.y"
 
 
 extern FILE *yyin;

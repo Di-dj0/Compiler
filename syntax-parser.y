@@ -12,6 +12,7 @@ typedef struct {
     int address;
 } _symbol;
 
+// this defines what an action is
 typedef struct {
     int id;
     int start;
@@ -126,8 +127,12 @@ declaracao : INT ID ATRIBUICAO exprecao     {
                                                 tabsymb[_nsymbs].id = $2;
                                                 tabsymb[_nsymbs].address = _nsymbs;
                                                 _nsymbs++;
+                                                fprintf(yyout, "LEIA\nATR %%%d\n", getAddress($2));
                                             }
-                                            fprintf(yyout, "ATR %%%d\n", getAddress($2));
+                                            else {
+                                                printf("ERRO: semantic error");
+                                                exit(1);
+                                            }
                                             } 
 
     | INT ID ATRIBUICAO SCAN ABRE_PARENTESES FECHA_PARENTESES 
@@ -136,8 +141,12 @@ declaracao : INT ID ATRIBUICAO exprecao     {
                                                 tabsymb[_nsymbs].id = $2;
                                                 tabsymb[_nsymbs].address = _nsymbs;
                                                 _nsymbs++;
+                                                fprintf(yyout, "LEIA\nATR %%%d\n", getAddress($2));
                                             }
-                                            fprintf(yyout, "LEIA\nATR %%%d\n", getAddress($3));
+                                            else {
+                                                printf("ERRO: semantic error");
+                                                exit(1);
+                                            }
                                             } ;
 
 atrib : ID ATRIBUICAO exprecao              {
