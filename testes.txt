@@ -1,18 +1,18 @@
-peso i = 10 ;
-peso j = 1 ;
-peso k = 0 ;
+peso i = 10;
+peso j = 1;
+peso k = 0;
 
-serie ( k != 5) {
+serie (k!=5) {
 
     supino (i > j) {
-        mostrar(i) ;
+        mostrar(i);
     }
     crossover {
         mostrar(j);
-    } ;
+    };
 
-    k = k + 1 ;
+    k=k+1;
 
-} ;
+};
 
 obrigado_turing ;

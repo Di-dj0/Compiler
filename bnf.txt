@@ -1,25 +1,58 @@
 <S> ::= <declaracao> <S_linha>
-     | <atrib> <S_linha>
-     | <leitura> <S_linha>
-     | <escrita> <S_linha>
-     | <condicao> <S_linha>
-     | <laco> <S_linha>
-     | <end>
+      | <atrib> <S_linha>
+      | <leitura> <S_linha>
+      | <escrita> <S_linha>
+      | <condicao> <S_linha>
+      | <laco> <S_linha>
+      | <end>
 
-<S_linha> ::= <PEV> <S>
-           | <PEV>
+<S_linha> ::= PEV <S>
+           | PEV
 
-<end> ::= <RETURN> <NUM> <PEV>
-       | <RETURN> <PEV>
+<end> ::= RETURN NUM PEV
+        | RETURN PEV
 
 <bloco> ::= <declaracao> <bloco_linha>
          | <condicao> <bloco_linha>
-         | <atrib> <bloco_linha> 
+         | <atrib> <bloco_linha>
          | <leitura> <bloco_linha>
          | <escrita> <bloco_linha>
          | <laco> <bloco_linha>
 
-<bloco_linha> ::= <PEV> <bloco>
-               | <PEV> ;
+<bloco_linha> ::= PEV <bloco>
+                | PEV
 
-laco :  ENQUANTO ABRE_PARENTESES comparacao FECHA_PARENTESES ABRE_CHAVES bloco FECHA_CHAVES   
+<laco> ::= ENQUANTO ABRE_PARENTESES <comparacao> FECHA_PARENTESES ABRE_CHAVES <bloco> FECHA_CHAVES
+
+<declaracao> ::= INT ID ATRIBUICAO <exprecao>
+              | INT ID ATRIBUICAO SCAN ABRE_PARENTESES FECHA_PARENTESES
+
+<atrib> ::= ID ATRIBUICAO <exprecao>
+         | ID ATRIBUICAO SCAN ABRE_PARENTESES FECHA_PARENTESES
+
+
+<condicao> ::=  SE ABRE_PARENTESES <comparacao> FECHA_PARENTESES ABRE_CHAVES <bloco> FECHA_CHAVES SENAO ABRE_CHAVES <bloco> FECHA_CHAVES
+
+<comparacao> ::= <exprecao> IGUAL <exprecao>
+              | <exprecao> DIFERENTE <exprecao>
+              | <exprecao> MAIOR <exprecao>
+              | <exprecao> MENOR <exprecao>
+              | <exprecao> MAIOR_IGUAL <exprecao>
+              | <exprecao> MENOR_IGUAL <exprecao>
+
+<leitura> ::= SCAN ABRE_PARENTESES ID FECHA_PARENTESES
+
+<escrita> ::= PRINT ABRE_PARENTESES <exprecao> FECHA_PARENTESES
+
+<exprecao> ::= <exprecao> MAIS <termo>
+            | <exprecao> MENOS <termo>
+            | <termo>
+
+<termo> ::= <termo> VEZES <fator>
+         | <termo> DIVIDIDO <fator>
+         | <termo> RESTO <fator>
+         | <fator>
+
+<fator> ::= ID
+         | NUM
+         | ABRE_PARENTESES <exprecao> FECHA_PARENTESES

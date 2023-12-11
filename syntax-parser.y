@@ -96,8 +96,8 @@ S : declaracao S_linha
 S_linha : PEV S
     | PEV ;
 
-end : RETURN NUM PEV                        {fprintf(yyout,"SAIR\n");} 
-    | RETURN PEV                            {fprintf(yyout,"SAIR\n");} ;
+end : RETURN NUM PEV                        {fprintf(yyout,"     SAIR\n");} 
+    | RETURN PEV                            {fprintf(yyout,"     SAIR\n");} ;
 
 bloco : declaracao bloco_linha
     | condicao bloco_linha
@@ -125,9 +125,9 @@ laco :  ENQUANTO                            {
         FECHA_PARENTESES
         ABRE_CHAVES                         {
                                             if(getActionEnding(_naction) < 10)
-                                                fprintf(yyout, "GFALSE R0%d\n", getActionEnding(_naction)); 
+                                                fprintf(yyout, "     GFALSE R0%d\n", getActionEnding(_naction)); 
                                             else
-                                                fprintf(yyout, "GFALSE R%d\n", getActionEnding(_naction));
+                                                fprintf(yyout, "     GFALSE R%d\n", getActionEnding(_naction));
                                             push(&stack, _naction);
                                             _naction++;
                                             }
@@ -135,9 +135,9 @@ laco :  ENQUANTO                            {
         FECHA_CHAVES                        {
                                             _nactionaux = pop(&stack);
                                             if(getActionStart(_nactionaux) < 10)
-                                                fprintf(yyout, "GOTO R0%d\n", getActionStart(_nactionaux) ); 
+                                                fprintf(yyout, "     GOTO R0%d\n", getActionStart(_nactionaux) ); 
                                             else
-                                                fprintf(yyout, "GOTO R%d\n", getActionStart(_nactionaux) ); 
+                                                fprintf(yyout, "     GOTO R%d\n", getActionStart(_nactionaux) ); 
                                               
                                             if(getActionEnding(_nactionaux) < 10)
                                                 fprintf(yyout, "R0%d: NADA\n", getActionEnding(_nactionaux)  ); 
@@ -150,7 +150,7 @@ declaracao : INT ID ATRIBUICAO exprecao     {
                                                 tabsymb[_nsymbs].id = $2;
                                                 tabsymb[_nsymbs].address = _nsymbs;
                                                 _nsymbs++;
-                                                fprintf(yyout, "ATR %%%d\n", getAddress($2));
+                                                fprintf(yyout, "     ATR %%%d\n", getAddress($2));
                                             }
                                             else {
                                                 printf("ERRO: semantic error");
@@ -177,7 +177,7 @@ atrib : ID ATRIBUICAO exprecao              {
                                                 printf("ERRO: semantic error");
                                                 exit(1);
                                             }
-                                            fprintf(yyout, "ATR %%%d\n", getAddress($1));
+                                            fprintf(yyout, "     ATR %%%d\n", getAddress($1));
                                             } 
 
     | ID ATRIBUICAO SCAN ABRE_PARENTESES FECHA_PARENTESES 
@@ -199,9 +199,9 @@ condicao :  SE                              {
             FECHA_PARENTESES 
             ABRE_CHAVES                     {
                                             if(getActionStart(_naction) < 10)
-                                                fprintf(yyout, "GFALSE R0%d\n", getActionStart(_naction)); 
+                                                fprintf(yyout, "     GFALSE R0%d\n", getActionStart(_naction)); 
                                             else
-                                                fprintf(yyout, "GFALSE R%d\n", getActionStart(_naction));
+                                                fprintf(yyout, "     GFALSE R%d\n", getActionStart(_naction));
                                             push(&stack, _naction);
                                             _naction++;
                                             }
@@ -209,9 +209,9 @@ condicao :  SE                              {
             FECHA_CHAVES                    {
                                             _nactionaux = pop(&stack);
                                             if(getActionEnding(_nactionaux) < 10)
-                                                fprintf(yyout, "GOTO R0%d\n", getActionEnding(_nactionaux) ); 
+                                                fprintf(yyout, "     GOTO R0%d\n", getActionEnding(_nactionaux) ); 
                                             else
-                                                fprintf(yyout, "GOTO R%d\n", getActionEnding(_nactionaux) );
+                                                fprintf(yyout, "     GOTO R%d\n", getActionEnding(_nactionaux) );
                                             } 
             SENAO
             ABRE_CHAVES                     {
@@ -228,12 +228,12 @@ condicao :  SE                              {
                                                 fprintf(yyout, "R%d: NADA\n", getActionEnding(_nactionaux)  ); 
                                             } ;
 
-comparacao : exprecao IGUAL exprecao              {fprintf(yyout, "IGUAL\n");} 
-        | exprecao DIFERENTE exprecao             {fprintf(yyout, "DIFER\n");} 
-        | exprecao MAIOR exprecao                 {fprintf(yyout, "MAIOR\n");} 
-        | exprecao MENOR exprecao                 {fprintf(yyout, "MENOR\n");} 
-        | exprecao MAIOR_IGUAL exprecao           {fprintf(yyout, "MAIOREQ\n");} 
-        | exprecao MENOR_IGUAL exprecao           {fprintf(yyout, "MENOREQ\n");} ;
+comparacao : exprecao IGUAL exprecao              {fprintf(yyout, "     IGUAL\n");} 
+        | exprecao DIFERENTE exprecao             {fprintf(yyout, "     DIFER\n");} 
+        | exprecao MAIOR exprecao                 {fprintf(yyout, "     MAIOR\n");} 
+        | exprecao MENOR exprecao                 {fprintf(yyout, "     MENOR\n");} 
+        | exprecao MAIOR_IGUAL exprecao           {fprintf(yyout, "     MAIOREQ\n");} 
+        | exprecao MENOR_IGUAL exprecao           {fprintf(yyout, "     MENOREQ\n");} ;
 
 leitura : SCAN ABRE_PARENTESES ID FECHA_PARENTESES 
                                             {
@@ -241,19 +241,19 @@ leitura : SCAN ABRE_PARENTESES ID FECHA_PARENTESES
                                                 printf("ERRO: semantic error");
                                                 exit(1);
                                             }
-                                            fprintf(yyout, "LEIA\nATR %%%d\n", getAddress($3));
+                                            fprintf(yyout, "     LEIA\n     ATR %%%d\n", getAddress($3));
                                             } ;
 
 escrita : PRINT ABRE_PARENTESES exprecao FECHA_PARENTESES
-                                            {fprintf(yyout, "IMPR\n"); } ;
+                                            {fprintf(yyout, "     IMPR\n"); } ;
 
-exprecao : exprecao MAIS termo              {fprintf(yyout, "SOMA\n");}
-        | exprecao MENOS termo              {fprintf(yyout, "SUB\n");}
+exprecao : exprecao MAIS termo              {fprintf(yyout, "     SOMA\n");}
+        | exprecao MENOS termo              {fprintf(yyout, "     SUB\n");}
         | termo ;
 
-termo : termo VEZES fator                   {fprintf(yyout, "MULT\n");}
-        | termo DIVIDIDO fator              {fprintf(yyout, "DIV\n");}
-        | termo RESTO fator                 {fprintf(yyout, "MOD\n");}
+termo : termo VEZES fator                   {fprintf(yyout, "     MULT\n");}
+        | termo DIVIDIDO fator              {fprintf(yyout, "     DIV\n");}
+        | termo RESTO fator                 {fprintf(yyout, "     MOD\n");}
         | fator ;
 
 fator : ID                                  {
@@ -261,10 +261,10 @@ fator : ID                                  {
                                                 printf("ERRO: semantic error");
                                                 exit(1);
                                             }
-                                            fprintf(yyout, "PUSH %%%d\n", getAddress($1));
+                                            fprintf(yyout, "     PUSH %%%d\n", getAddress($1));
                                             }
                                             
-        | NUM                               {fprintf(yyout, "PUSH %d\n", $1); }
+        | NUM                               {fprintf(yyout, "     PUSH %d\n", $1); }
  
         | ABRE_PARENTESES exprecao FECHA_PARENTESES ;
 
