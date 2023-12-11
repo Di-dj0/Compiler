@@ -1,18 +1,22 @@
-peso halter_1 = lerexercicio() ;
-peso halter_2 = lerexercicio() ;
-peso rep = 10 ;
+peso i = 5;
 
-serie (rep != 0) {
-    supino (halter_1 > halter_2) {
-        mostrar (halter_1) ;
-    }
-    crossover {
-        mostrar (halter_2) ;
-    } ;
+serie ( i != 0) {
+    mostrar(i);
+    i = i - 1;
+} ;
 
-    rep = rep - 1 ;
+i = 6 ;
 
-    halter_1 = lerexercicio();
+serie (i != 0) {
+    mostrar(i);
+    i = i - 1;
+} ;
+
+i = 7 ;
+
+serie (i != 0) {
+    mostrar(i);
+    i = i - 1;
 } ;
 
 obrigado_turing ;

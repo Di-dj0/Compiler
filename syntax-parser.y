@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// yyout defines the file used as an output for the programm
 extern FILE *yyout;
 
 // this is needed to define what a simbol is
@@ -19,11 +20,32 @@ typedef struct {
     int end;
 } _action;
 
-// and this is the vector of symbols used
+// finally, this defines the stack of actions
+typedef struct {
+    int tabaction[1000];
+    int iterator;
+} _labelStack;
+
+void push(_labelStack *stack, int id);
+int pop(_labelStack *stack);
+
+// here we have the push action, that receives a stack and an id, to do a stack.push_back(id)
+void push(_labelStack *stack, int id) {
+        stack->tabaction[stack->iterator] = id;
+        stack->iterator++;
+}
+
+// and here we hava the pop action, that receives a stack and returns the action id, as the stack.pop()
+int pop(_labelStack *stack) {
+        stack->iterator--;
+        return stack->tabaction[stack->iterator];
+}
+
+// these are the variables and vectors 
 _symbol tabsymb[1000];
-int _nsymbs = 0;
 _action tabaction[1000];
-int _naction = 0;
+int _nsymbs = 0, _naction = 0, _nactionaux = 0;
+_labelStack stack;
 
 // we need to check if the ID is already in the programm everytime a new ID is identified
 int getAddress(char *id) {
@@ -106,20 +128,21 @@ laco :  ENQUANTO                            {
                                                 fprintf(yyout, "GFALSE R0%d\n", getActionEnding(_naction)); 
                                             else
                                                 fprintf(yyout, "GFALSE R%d\n", getActionEnding(_naction));
+                                            push(&stack, _naction);
                                             _naction++;
                                             }
         bloco      
         FECHA_CHAVES                        {
-                                            _naction--;
-                                            if(getActionStart(_naction) < 10)
-                                                fprintf(yyout, "GOTO R0%d\n", getActionStart(_naction) ); 
+                                            _nactionaux = pop(&stack);
+                                            if(getActionStart(_nactionaux) < 10)
+                                                fprintf(yyout, "GOTO R0%d\n", getActionStart(_nactionaux) ); 
                                             else
-                                                fprintf(yyout, "GOTO R%d\n", getActionStart(_naction) ); 
+                                                fprintf(yyout, "GOTO R%d\n", getActionStart(_nactionaux) ); 
                                               
-                                            if(getActionEnding(_naction) < 10)
-                                                fprintf(yyout, "R0%d: NADA\n", getActionEnding(_naction)  ); 
+                                            if(getActionEnding(_nactionaux) < 10)
+                                                fprintf(yyout, "R0%d: NADA\n", getActionEnding(_nactionaux)  ); 
                                             else
-                                                fprintf(yyout, "R%d: NADA\n", getActionEnding(_naction)  ); 
+                                                fprintf(yyout, "R%d: NADA\n", getActionEnding(_nactionaux)  ); 
                                             } ;
 
 declaracao : INT ID ATRIBUICAO exprecao     {
@@ -127,7 +150,7 @@ declaracao : INT ID ATRIBUICAO exprecao     {
                                                 tabsymb[_nsymbs].id = $2;
                                                 tabsymb[_nsymbs].address = _nsymbs;
                                                 _nsymbs++;
-                                                fprintf(yyout, "LEIA\nATR %%%d\n", getAddress($2));
+                                                fprintf(yyout, "ATR %%%d\n", getAddress($2));
                                             }
                                             else {
                                                 printf("ERRO: semantic error");
@@ -179,31 +202,30 @@ condicao :  SE                              {
                                                 fprintf(yyout, "GFALSE R0%d\n", getActionStart(_naction)); 
                                             else
                                                 fprintf(yyout, "GFALSE R%d\n", getActionStart(_naction));
+                                            push(&stack, _naction);
                                             _naction++;
                                             }
             bloco
             FECHA_CHAVES                    {
-                                            _naction--;
-                                            if(getActionEnding(_naction) < 10)
-                                                fprintf(yyout, "GOTO R0%d\n", getActionEnding(_naction) ); 
+                                            _nactionaux = pop(&stack);
+                                            if(getActionEnding(_nactionaux) < 10)
+                                                fprintf(yyout, "GOTO R0%d\n", getActionEnding(_nactionaux) ); 
                                             else
-                                                fprintf(yyout, "GOTO R%d\n", getActionEnding(_naction) );
+                                                fprintf(yyout, "GOTO R%d\n", getActionEnding(_nactionaux) );
                                             } 
             SENAO
             ABRE_CHAVES                     {
-                                            if(getActionStart(_naction) < 10)
-                                                fprintf(yyout, "R0%d: NADA\n", getActionStart(_naction)  ); 
+                                            if(getActionStart(_nactionaux) < 10)
+                                                fprintf(yyout, "R0%d: NADA\n", getActionStart(_nactionaux)  ); 
                                             else
-                                                fprintf(yyout, "R%d: NADA\n", getActionStart(_naction)  ); 
-                                            _naction++;
+                                                fprintf(yyout, "R%d: NADA\n", getActionStart(_nactionaux)  );
                                             }
             bloco
             FECHA_CHAVES                    {
-                                            _naction--;
-                                            if(getActionEnding(_naction) < 10)
-                                                fprintf(yyout, "R0%d: NADA\n", getActionEnding(_naction)  ); 
+                                            if(getActionEnding(_nactionaux) < 10)
+                                                fprintf(yyout, "R0%d: NADA\n", getActionEnding(_nactionaux)  ); 
                                             else
-                                                fprintf(yyout, "R%d: NADA\n", getActionEnding(_naction)  ); 
+                                                fprintf(yyout, "R%d: NADA\n", getActionEnding(_nactionaux)  ); 
                                             } ;
 
 comparacao : exprecao IGUAL exprecao              {fprintf(yyout, "IGUAL\n");} 
