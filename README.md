@@ -1,3 +1,8 @@
+# Credits:
+- Gustavo Figura - RA: 2315246;
+- Iuri Gabriel Klassen - RA: 2266105;
+- Luiz "Didjo" Gustavo Comarella - RA: 2265079;
+
 # Compiler
 A compiler capable of understanding and creating code with a new language.
 
