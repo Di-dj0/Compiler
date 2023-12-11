@@ -1586,7 +1586,7 @@ yyreduce:
                                                 fprintf(yyout, "     ATR %%%d\n", getAddress((yyvsp[(2) - (4)].str_val)));
                                             }
                                             else {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             ;}
@@ -1604,7 +1604,7 @@ yyreduce:
                                                 fprintf(yyout, "LEIA\nATR %%%d\n", getAddress((yyvsp[(2) - (6)].str_val)));
                                             }
                                             else {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             ;}
@@ -1616,7 +1616,7 @@ yyreduce:
 #line 175 "syntax-parser.y"
     {
                                             if(getAddress((yyvsp[(1) - (3)].str_val))==-1) {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             fprintf(yyout, "     ATR %%%d\n", getAddress((yyvsp[(1) - (3)].str_val)));
@@ -1629,7 +1629,7 @@ yyreduce:
 #line 184 "syntax-parser.y"
     {
                                             if(getAddress((yyvsp[(3) - (5)].str_val))==-1) {
-                                                fprintf(yyout, "ERRO: semantic error");
+                                                fprintf(yyout, "ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             fprintf(yyout, "LEIA\nATR %%%d\n", getAddress((yyvsp[(3) - (5)].str_val)));
@@ -1746,7 +1746,7 @@ yyreduce:
 #line 239 "syntax-parser.y"
     {
                                             if(getAddress((yyvsp[(3) - (4)].str_val))==-1) {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             fprintf(yyout, "     LEIA\n     ATR %%%d\n", getAddress((yyvsp[(3) - (4)].str_val)));
@@ -1801,7 +1801,7 @@ yyreduce:
 #line 259 "syntax-parser.y"
     {
                                             if(getAddress((yyvsp[(1) - (1)].str_val))==-1) {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             fprintf(yyout, "     PUSH %%%d\n", getAddress((yyvsp[(1) - (1)].str_val)));

@@ -1,0 +1,5 @@
+peso i = 0;
+peso j = 1;
+peso _h = 2;
+
+obrigado_turing;

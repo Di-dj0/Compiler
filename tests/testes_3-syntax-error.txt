@@ -1,0 +1,12 @@
+peso i = 0;
+peso j = 1;
+peso k = 2
+
+supino (i > j) {
+    mostrar(i);
+}
+crossover {
+    mostrar(j);
+}
+
+obrigado_turing;

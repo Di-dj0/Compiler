@@ -1,0 +1,13 @@
+peso i = 0;
+peso j = 1;
+
+serie(k != 5) {
+
+    j = j + 1;
+    i = j * 2;
+
+    mostrar(i);
+
+};
+
+obrigado_turing;

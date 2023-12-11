@@ -153,7 +153,7 @@ declaracao : INT ID ATRIBUICAO exprecao     {
                                                 fprintf(yyout, "     ATR %%%d\n", getAddress($2));
                                             }
                                             else {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             } 
@@ -167,14 +167,14 @@ declaracao : INT ID ATRIBUICAO exprecao     {
                                                 fprintf(yyout, "LEIA\nATR %%%d\n", getAddress($2));
                                             }
                                             else {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             } ;
 
 atrib : ID ATRIBUICAO exprecao              {
                                             if(getAddress($1)==-1) {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             fprintf(yyout, "     ATR %%%d\n", getAddress($1));
@@ -183,7 +183,7 @@ atrib : ID ATRIBUICAO exprecao              {
     | ID ATRIBUICAO SCAN ABRE_PARENTESES FECHA_PARENTESES 
                                             {
                                             if(getAddress($3)==-1) {
-                                                fprintf(yyout, "ERRO: semantic error");
+                                                fprintf(yyout, "ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             fprintf(yyout, "LEIA\nATR %%%d\n", getAddress($3));
@@ -238,7 +238,7 @@ comparacao : exprecao IGUAL exprecao              {fprintf(yyout, "     IGUAL\n"
 leitura : SCAN ABRE_PARENTESES ID FECHA_PARENTESES 
                                             {
                                             if(getAddress($3)==-1) {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             fprintf(yyout, "     LEIA\n     ATR %%%d\n", getAddress($3));
@@ -258,7 +258,7 @@ termo : termo VEZES fator                   {fprintf(yyout, "     MULT\n");}
 
 fator : ID                                  {
                                             if(getAddress($1)==-1) {
-                                                printf("ERRO: semantic error");
+                                                printf("ERRO: semantic error\n");
                                                 exit(1);
                                             }
                                             fprintf(yyout, "     PUSH %%%d\n", getAddress($1));

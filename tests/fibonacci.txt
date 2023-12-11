@@ -1,0 +1,17 @@
+peso i = 1;
+peso j = 1;
+peso aux = 0;
+peso k = lerexercicio();
+
+serie (k != 0) {
+
+    mostrar(i);
+
+    aux = i + j;
+    j = i;
+    i = aux;
+
+    k = k+-1;
+};
+
+obrigado_turing;

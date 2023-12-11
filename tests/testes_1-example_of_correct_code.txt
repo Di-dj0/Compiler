@@ -1,0 +1,23 @@
+peso i = 10;
+peso j = 1;
+peso k = 0;
+
+serie(k!=-1) {
+    serie (k!=99) {
+        // se i maior que j, mostre i
+        supino (i > j) {
+            mostrar(i);
+            j = j * 2;
+        }
+        // se nao, mostre apenas j
+        crossover {
+            mostrar(j);
+            i = i * 5;
+        };
+        //incremente k em 1
+        k=k+1;
+    };
+    lerexercicio(k);
+};
+
+obrigado_turing ;
