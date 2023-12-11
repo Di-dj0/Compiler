@@ -1,0 +1,25 @@
+<S> ::= <declaracao> <S_linha>
+     | <atrib> <S_linha>
+     | <leitura> <S_linha>
+     | <escrita> <S_linha>
+     | <condicao> <S_linha>
+     | <laco> <S_linha>
+     | <end>
+
+<S_linha> ::= <PEV> <S>
+           | <PEV>
+
+<end> ::= <RETURN> <NUM> <PEV>
+       | <RETURN> <PEV>
+
+<bloco> ::= <declaracao> <bloco_linha>
+         | <condicao> <bloco_linha>
+         | <atrib> <bloco_linha> 
+         | <leitura> <bloco_linha>
+         | <escrita> <bloco_linha>
+         | <laco> <bloco_linha>
+
+<bloco_linha> ::= <PEV> <bloco>
+               | <PEV> ;
+
+laco :  ENQUANTO ABRE_PARENTESES comparacao FECHA_PARENTESES ABRE_CHAVES bloco FECHA_CHAVES   
