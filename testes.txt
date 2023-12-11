@@ -1,22 +1,18 @@
-peso i = 5;
+peso i = 10 ;
+peso j = 1 ;
+peso k = 0 ;
 
-serie ( i != 0) {
-    mostrar(i);
-    i = i - 1;
-} ;
+serie ( k != 5) {
 
-i = 6 ;
+    supino (i > j) {
+        mostrar(i) ;
+    }
+    crossover {
+        mostrar(j);
+    } ;
 
-serie (i != 0) {
-    mostrar(i);
-    i = i - 1;
-} ;
+    k = k + 1 ;
 
-i = 7 ;
-
-serie (i != 0) {
-    mostrar(i);
-    i = i - 1;
 } ;
 
 obrigado_turing ;
