@@ -5,13 +5,22 @@ A compiler capable of understanding and creating code with a new language.
 To use this compiler, you will need the Flex and Bison applications installed.
 
 - First use the command to create the bison files and headers. The prefix '-d' make it explicit to bison to create a header file alongside its C file:
+
+```console
 bison -d syntax-parser.y
+```
 
 - Then create the flex files. This must create the file "lex.yy.c":
+
+```console
 flex lexical-parser.l
+```
 
 - Finally, create the executable file using gcc:
+
+```console
 gcc -o <name_of_file> lex.yy.c syntax-parser.tab.c
+```
 
 - Done!
 
