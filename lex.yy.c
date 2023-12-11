@@ -814,7 +814,7 @@ YY_RULE_SETUP
 case 30:
 YY_RULE_SETUP
 #line 53 "lexical-parser.l"
-{ printf("ERRO: lexical error in %d: %s\n", lineCounter, yytext); return 1; }
+{ printf("ERRO: lexical error in %d: %s\n", lineCounter, yytext); exit(1); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP

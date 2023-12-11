@@ -491,8 +491,8 @@ static const yytype_uint8 yyprhs[] =
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      30,     0,    -1,    38,    31,    -1,    40,    31,    -1,    39,
-      31,    -1,    46,    31,    -1,    47,    31,    -1,    35,    31,
+      30,     0,    -1,    38,    31,    -1,    39,    31,    -1,    46,
+      31,    -1,    47,    31,    -1,    40,    31,    -1,    35,    31,
       -1,    32,    -1,    22,    30,    -1,    22,    -1,     9,    23,
       22,    -1,     9,    22,    -1,    38,    34,    -1,    40,    34,
       -1,    39,    34,    -1,    46,    34,    -1,    47,    34,    -1,
@@ -579,8 +579,8 @@ static const yytype_uint8 yydefact[] =
 {
        0,     0,     0,     0,     0,    28,     0,    21,     0,     8,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    12,     0,     0,     1,    10,     7,     2,     4,     3,
-       5,     6,     0,    48,     0,    49,     0,    26,    43,    47,
+       0,    12,     0,     0,     1,    10,     7,     2,     3,     6,
+       4,     5,     0,    48,     0,    49,     0,    26,    43,    47,
        0,     0,     0,    11,     0,     9,     0,    24,     0,     0,
        0,     0,     0,     0,     0,    40,    39,     0,     0,     0,
        0,    27,    50,    41,    42,    44,    45,    46,     0,     0,
@@ -1585,7 +1585,7 @@ yyreduce:
     {
                                             if(getAddress((yyvsp[(1) - (3)].str_val))==-1) {
                                                 printf("ERRO: semantic error");
-                                                return 1;
+                                                exit(1);
                                             }
                                             fprintf(yyout, "ATR %%%d\n", getAddress((yyvsp[(1) - (3)].str_val)));
                                             ;}
@@ -1598,7 +1598,7 @@ yyreduce:
     {
                                             if(getAddress((yyvsp[(3) - (5)].str_val))==-1) {
                                                 fprintf(yyout, "ERRO: semantic error");
-                                                return 1;
+                                                exit(1);
                                             }
                                             fprintf(yyout, "LEIA\nATR %%%d\n", getAddress((yyvsp[(3) - (5)].str_val)));
                                             ;}
@@ -1716,7 +1716,7 @@ yyreduce:
     {
                                             if(getAddress((yyvsp[(3) - (4)].str_val))==-1) {
                                                 printf("ERRO: semantic error");
-                                                return 1;
+                                                exit(1);
                                             }
                                             fprintf(yyout, "LEIA\nATR %%%d\n", getAddress((yyvsp[(3) - (4)].str_val)));
                                             ;}
@@ -1771,7 +1771,7 @@ yyreduce:
     {
                                             if(getAddress((yyvsp[(1) - (1)].str_val))==-1) {
                                                 printf("ERRO: semantic error");
-                                                return 1;
+                                                exit(1);
                                             }
                                             fprintf(yyout, "PUSH %%%d\n", getAddress((yyvsp[(1) - (1)].str_val)));
                                             ;}

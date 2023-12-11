@@ -63,10 +63,10 @@ int getActionEnding(int id) {
 %%
 
 S : declaracao S_linha
-    | condicao  S_linha
     | atrib S_linha 
     | leitura S_linha
     | escrita S_linha
+    | condicao S_linha
     | laco S_linha
     | end ;
 
@@ -143,7 +143,7 @@ declaracao : INT ID ATRIBUICAO exprecao     {
 atrib : ID ATRIBUICAO exprecao              {
                                             if(getAddress($1)==-1) {
                                                 printf("ERRO: semantic error");
-                                                return 1;
+                                                exit(1);
                                             }
                                             fprintf(yyout, "ATR %%%d\n", getAddress($1));
                                             } 
@@ -152,7 +152,7 @@ atrib : ID ATRIBUICAO exprecao              {
                                             {
                                             if(getAddress($3)==-1) {
                                                 fprintf(yyout, "ERRO: semantic error");
-                                                return 1;
+                                                exit(1);
                                             }
                                             fprintf(yyout, "LEIA\nATR %%%d\n", getAddress($3));
                                             } ;
@@ -208,7 +208,7 @@ leitura : SCAN ABRE_PARENTESES ID FECHA_PARENTESES
                                             {
                                             if(getAddress($3)==-1) {
                                                 printf("ERRO: semantic error");
-                                                return 1;
+                                                exit(1);
                                             }
                                             fprintf(yyout, "LEIA\nATR %%%d\n", getAddress($3));
                                             } ;
@@ -228,7 +228,7 @@ termo : termo VEZES fator                   {fprintf(yyout, "MULT\n");}
 fator : ID                                  {
                                             if(getAddress($1)==-1) {
                                                 printf("ERRO: semantic error");
-                                                return 1;
+                                                exit(1);
                                             }
                                             fprintf(yyout, "PUSH %%%d\n", getAddress($1));
                                             }

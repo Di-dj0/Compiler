@@ -50,6 +50,6 @@
 " "                     {}
 "\n"                    { lineCounter++; }
 "//".*                  { /* Ignorar comentários de linha */ }
-.                       { printf("ERRO: lexical error in %d: %s\n", lineCounter, yytext); return 1; }
+.                       { printf("ERRO: lexical error in %d: %s\n", lineCounter, yytext); exit(1); }
 
 %%
