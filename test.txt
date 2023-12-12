@@ -1,0 +1,8 @@
+peso i = 1;
+
+serie(i <= 100) {
+    mostrar(i);
+    i=i+1;
+};
+
+obrigado_turing;

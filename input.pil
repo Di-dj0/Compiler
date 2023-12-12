@@ -1,30 +1,16 @@
      PUSH 1
      ATR %0
-     PUSH 1
-     ATR %1
-     PUSH 0
-     ATR %2
-LEIA
-ATR %3
 R00: NADA
-     PUSH %3
-     PUSH 0
-     DIFER
+     PUSH %0
+     PUSH 100
+     MENOREQ
      GFALSE R01
      PUSH %0
      IMPR
      PUSH %0
-     PUSH %1
+     PUSH 1
      SOMA
-     ATR %2
-     PUSH %0
-     ATR %1
-     PUSH %2
      ATR %0
-     PUSH %3
-     PUSH -1
-     SOMA
-     ATR %3
      GOTO R00
 R01: NADA
      SAIR
