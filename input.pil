@@ -1,16 +1,46 @@
-     PUSH 1
+     PUSH 10
      ATR %0
+     PUSH 1
+     ATR %1
+     PUSH 0
+     ATR %2
 R00: NADA
-     PUSH %0
-     PUSH 100
-     MENOREQ
+     PUSH %2
+     PUSH -1
+     DIFER
      GFALSE R01
+R02: NADA
+     PUSH %2
+     PUSH 99
+     DIFER
+     GFALSE R03
+     PUSH %0
+     PUSH %1
+     MAIOR
+     GFALSE R04
      PUSH %0
      IMPR
+     PUSH %1
+     PUSH 2
+     MULT
+     ATR %1
+     GOTO R05
+R04: NADA
+     PUSH %1
+     IMPR
      PUSH %0
+     PUSH 5
+     MULT
+     ATR %0
+R05: NADA
+     PUSH %2
      PUSH 1
      SOMA
-     ATR %0
+     ATR %2
+     GOTO R02
+R03: NADA
+     LEIA
+     ATR %2
      GOTO R00
 R01: NADA
      SAIR

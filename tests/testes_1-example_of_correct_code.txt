@@ -3,7 +3,7 @@ peso j = 1;
 peso k = 0;
 
 serie(k!=-1) {
-    serie (k!=99) {
+    serie (k!=15) {
         // se i maior que j, mostre i
         supino (i > j) {
             mostrar(i);
